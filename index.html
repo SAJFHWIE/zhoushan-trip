@@ -214,53 +214,53 @@ const d1Route = [
   [29.92, 121.85],  // 接近跨海大桥
   [30.02, 122.00],  // 舟山跨海大桥（金塘大桥段）
   [29.98, 122.12],  // 过桥后进入舟山本岛
-  [29.96, 122.22],  // 沈家门方向
-  [29.92, 122.30],  // 朱家尖大桥
-  [29.845, 122.385],  // 朱家尖南沙
-  [29.955, 122.225],  // 沈家门渔港
+  [29.95, 122.25],  // 沈家门方向
+  [29.92, 122.32],  // 朱家尖大桥
+  [29.881, 122.407],  // 朱家尖南沙
+  [29.944, 122.310],  // 沈家门渔港
 ];
 L.polyline(d1Route,{color:'#f97316',weight:4,opacity:0.85,lineCap:'round',lineJoin:'round'}).addTo(map);
 
 const d1Markers = [
-  {lat:29.845,lng:122.385,name:'朱家尖南沙',desc:'十里金沙·日落·车泊露营',icon:icons.scenic('#f97316')},
-  {lat:29.955,lng:122.225,name:'沈家门渔港',desc:'海鲜夜排档：梭子蟹/皮皮虾/望潮',icon:icons.food},
+  {lat:29.881,lng:122.407,name:'朱家尖南沙',desc:'十里金沙·日落·车泊露营',icon:icons.scenic('#f97316')},
+  {lat:29.944,lng:122.310,name:'沈家门渔港',desc:'海鲜夜排档：梭子蟹/皮皮虾/望潮',icon:icons.food},
 ];
 d1Markers.forEach(p=>L.marker([p.lat,p.lng],{icon:p.icon}).bindPopup('<b>'+p.name+'</b><br><span style="color:#666;font-size:12px">'+p.desc+'</span>').addTo(map));
-L.marker([29.845,122.385],{icon:icons.camp}).bindPopup('<b>Day1 车泊</b><br>南沙停车场').addTo(map);
-L.marker([29.87,122.38],{icon:icons.label('DAY 1','#f97316')}).addTo(map);
+L.marker([29.876,122.407],{icon:icons.camp}).bindPopup('<b>Day1 车泊</b><br>南沙停车场').addTo(map);
+L.marker([29.88,122.38],{icon:icons.label('DAY 1','#f97316')}).addTo(map);
 
 // ===== DAY 2: 南沙 → 大青山 → 东沙湾 → 跨海回本岛 → 定海古城 =====
 const d2Route = [
-  [29.845, 122.385], // 南沙出发
-  [29.830, 122.370], // 往南
-  [29.810, 122.350], // 大青山方向
-  [29.805, 122.335], // 大青山
-  [29.820, 122.360], // 返回
-  [29.850, 122.400], // 往东
-  [29.875, 122.435], // 东沙湾
-  [29.890, 122.420], // 返回
+  [29.881, 122.407], // 南沙出发
+  [29.870, 122.400], // 往南
+  [29.855, 122.395], // 大青山方向
+  [29.848, 122.393], // 大青山
+  [29.855, 122.400], // 返回
+  [29.870, 122.410], // 往东
+  [29.881, 122.417], // 东沙湾
+  [29.890, 122.410], // 返回
   [29.910, 122.350], // 朱家尖大桥回本岛
-  [29.940, 122.250], // 沈家门方向
-  [29.970, 122.180], // 往西
-  [29.995, 122.110], // 定海古城
+  [29.940, 122.280], // 沈家门方向
+  [29.970, 122.200], // 往西
+  [30.018, 122.113], // 定海古城
 ];
 L.polyline(d2Route,{color:'#a78bfa',weight:4,opacity:0.85,lineCap:'round',lineJoin:'round',dashArray:'10 6'}).addTo(map);
 
 const d2Markers = [
-  {lat:29.805,lng:122.335,name:'大青山国家公园',desc:'环岛海岸线·里沙千沙青沙',icon:icons.scenic('#a78bfa')},
-  {lat:29.875,lng:122.435,name:'东沙湾',desc:'冲浪/桨板·舟山鱼丸',icon:icons.scenic('#a78bfa')},
-  {lat:29.995,lng:122.110,name:'定海古城',desc:'1300年古城·中大街·蟹骨酱',icon:icons.scenic('#a78bfa')},
+  {lat:29.848,lng:122.393,name:'大青山国家公园',desc:'环岛海岸线·里沙千沙青沙',icon:icons.scenic('#a78bfa')},
+  {lat:29.881,lng:122.417,name:'东沙湾',desc:'冲浪/桨板·舟山鱼丸',icon:icons.scenic('#a78bfa')},
+  {lat:30.018,lng:122.113,name:'定海古城',desc:'1300年古城·中大街·蟹骨酱',icon:icons.scenic('#a78bfa')},
 ];
 d2Markers.forEach(p=>L.marker([p.lat,p.lng],{icon:p.icon}).bindPopup('<b>'+p.name+'</b><br><span style="color:#666;font-size:12px">'+p.desc+'</span>').addTo(map));
-L.marker([29.995,122.110],{icon:icons.camp}).bindPopup('<b>Day2 住宿</b><br>定海城区车泊或民宿<br>昌国路特斯拉超充').addTo(map);
-L.marker([29.975,122.130],{icon:icons.charge}).bindPopup('<b>定海特斯拉超充</b><br>昌国路').addTo(map);
-L.marker([29.90,122.22],{icon:icons.label('DAY 2','#a78bfa')}).addTo(map);
+L.marker([30.018,122.113],{icon:icons.camp}).bindPopup('<b>Day2 住宿</b><br>定海城区车泊或民宿<br>昌国路特斯拉超充').addTo(map);
+L.marker([30.015,122.105],{icon:icons.charge}).bindPopup('<b>定海特斯拉超充</b><br>昌国路').addTo(map);
+L.marker([29.93,122.25],{icon:icons.label('DAY 2','#a78bfa')}).addTo(map);
 
 // ===== DAY 3: 定海 → 宁波方向 → 天一阁 → 缸鸭狗 → 南塘老街 → 返程 =====
 const d3Route = [
-  [29.995, 122.110], // 定海古城出发
-  [29.970, 122.050], // 往西
-  [29.950, 121.950], // 跨海回宁波方向
+  [30.018, 122.113], // 定海古城出发
+  [29.990, 122.050], // 往西
+  [29.960, 121.950], // 跨海回宁波方向
   [29.920, 121.850], // 镇海
   [29.890, 121.700], // 宁波市区方向
   [29.872, 121.545], // 天一阁
@@ -283,7 +283,7 @@ L.marker([29.88,121.60],{icon:icons.label('DAY 3','#06b6d4')}).addTo(map);
 
 // Fit bounds to show the whole route
 const allPts = [
-  [29.845,122.435],[29.995,122.110],[29.805,122.335],[29.872,121.545]
+  [29.848,122.417],[30.018,122.113],[29.848,122.393],[29.872,121.545]
 ];
 map.fitBounds(L.latLngBounds(allPts),{padding:[50,50]});
 
