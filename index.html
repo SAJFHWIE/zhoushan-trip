@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>舟山朱家尖 3天2晚行程</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;color:#e2e8f0}
+#app{display:flex;height:100vh}
+#sidebar{width:440px;overflow-y:auto;padding:20px;background:#1e293b;border-right:1px solid #334155}
+#map{flex:1;z-index:1}
+h1{font-size:20px;margin-bottom:4px;color:#f1f5f9}
+.sub{font-size:13px;color:#94a3b8;margin-bottom:16px}
+.day-section{margin-bottom:16px}
+.day-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;cursor:pointer;padding:8px 12px;border-radius:10px;transition:background .2s}
+.day-header:hover{background:#1a2744}
+.day-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.day-header h2{font-size:15px;color:#f1f5f9;flex:1}
+.day-header .dist{font-size:11px;color:#64748b}
+.spot{background:#0f172a;border:1px solid #334155;border-radius:10px;padding:12px;margin-bottom:8px;margin-left:20px;border-left:3px solid var(--dc)}
+.spot h4{font-size:13px;color:#f1f5f9;margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.spot p{font-size:12px;color:#94a3b8;line-height:1.7}
+.spot .time{font-size:11px;color:var(--dc);font-weight:600;margin-right:4px}
+.badge{display:inline-block;font-size:10px;padding:1px 6px;border-radius:6px;margin-left:4px}
+.b-free{background:rgba(52,211,153,.15);color:#34d399}
+.b-pay{background:rgba(251,146,55,.15);color:#fb9237}
+.b-card{background:rgba(56,189,248,.15);color:#38bdf8}
+.b-food{background:rgba(244,114,182,.15);color:#f472b6}
+.tips{background:#0f172a;border:1px solid #334155;border-radius:10px;padding:14px;margin-top:12px}
+.tips h3{font-size:13px;color:#f1f5f9;margin-bottom:6px}
+.tips p,.tips td{font-size:12px;color:#94a3b8;line-height:1.8}
+table{width:100%;border-collapse:collapse;margin-top:8px}
+th{text-align:left;font-size:11px;color:#64748b;padding:4px 8px;border-bottom:1px solid #334155}
+td{padding:4px 8px;border-bottom:1px solid #1e293b}
+.nav-a{display:inline-block;font-size:11px;color:#38bdf8;text-decoration:none;margin-right:6px;margin-top:4px;padding:2px 8px;background:rgba(56,189,248,.1);border-radius:8px}
+.nav-a:hover{background:rgba(56,189,248,.2)}
+.d1{--dc:#f97316} .d2{--dc:#a78bfa} .d3{--dc:#06b6d4}
+.budget-total{font-size:24px;color:#f1f5f9;font-weight:700;margin:8px 0}
+.budget-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1e293b;font-size:12px}
+.budget-row .label{color:#94a3b8}
+.budget-row .value{color:#f1f5f9;font-weight:600}
+.budget-row .value.free{color:#34d399}
+.budget-note{font-size:11px;color:#64748b;margin-top:8px;line-height:1.6}
+@media(max-width:768px){#app{flex-direction:column}#sidebar{width:100%;height:50%}#map{height:50%}}
+</style>
+</head>
+<body>
+<div id="app">
+<div id="sidebar">
+<h1>舟山朱家尖 · 3天2晚</h1>
+<p class="sub">床车露营 | 特斯拉 Model Y | 含天一阁</p>
+
+<div class="day-section d1">
+<div class="day-header" onclick="toggleDay(0)">
+  <div class="day-dot" style="background:#f97316"></div>
+  <h2>DAY 1 周五｜直奔海边</h2>
+  <span class="dist">~280km / 3.5h</span>
+</div>
+<div class="day-body">
+  <div class="spot">
+    <h4><span class="time">下午</span>出发 → 朱家尖</h4>
+    <p>走 G9211 舟高速，过舟山跨海大桥（西门大桥主跨 1650m），直达朱家尖</p>
+  </div>
+  <div class="spot">
+    <h4><span class="time">傍晚</span>朱家尖南沙 <span class="badge b-pay">¥60</span><span class="badge b-card">文旅卡</span></h4>
+    <p>十里金沙，沙质细腻。看日落，停车场车泊露营。旺季门票 60 元，浙江文旅卡预计可免</p>
+    <a class="nav-a" href="https://uri.amap.com/navigation?to=122.385,29.845,朱家尖南沙&mode=car&callnative=1" target="_blank">📍 导航</a>
+  </div>
+  <div class="spot">
+    <h4><span class="time">晚餐</span>沈家门海鲜夜排档 <span class="badge b-food">美食</span></h4>
+    <p>中国最大渔港旁大排档一条街。推荐：梭子蟹、皮皮虾、望潮、虾潺、佛手螺。人均 100-150 元</p>
+    <a class="nav-a" href="https://uri.amap.com/navigation?to=122.225,29.955,沈家门渔港&mode=car&callnative=1" target="_blank">📍 导航</a>
+  </div>
+  <div class="spot" style="border-left-color:#facc15">
+    <h4>🏕 Day1 住宿：南沙停车场车泊</h4>
+    <p>南沙停车场允许过夜车泊，有公共卫生间。开露营模式整晚空调，听海浪入眠。免费</p>
+  </div>
+</div>
+</div>
+
+<div class="day-section d2">
+<div class="day-header" onclick="toggleDay(1)">
+  <div class="day-dot" style="background:#a78bfa"></div>
+  <h2>DAY 2 周六｜环岛 + 古城</h2>
+  <span class="dist">岛内 ~80km</span>
+</div>
+<div class="day-body">
+  <div class="spot">
+    <h4><span class="time">上午</span>大青山国家公园 <span class="badge b-pay">¥60</span><span class="badge b-card">文旅卡</span></h4>
+    <p>环岛海岸线：里沙→千沙→青沙三片无人沙滩。牛头山 360° 俯瞰舟山群岛。门票 60 元，文旅卡预计可免</p>
+    <a class="nav-a" href="https://uri.amap.com/navigation?to=122.335,29.805,大青山国家公园&mode=car&callnative=1" target="_blank">📍 导航</a>
+  </div>
+  <div class="spot">
+    <h4><span class="time">午餐</span>朱家尖渔村大排档 <span class="badge b-food">美食</span></h4>
+    <p>大青山脚下本地小馆。推荐：舟山带鱼（清蒸）、红膏咸炝蟹（生腌）、海鲜面（黄鱼面/蛏子面）</p>
+  </div>
+  <div class="spot">
+    <h4><span class="time">下午</span>东沙湾 <span class="badge b-free">免费</span></h4>
+    <p>冲浪/桨板基地，7 月水温适宜。路边有舟山鱼丸（马鲛鱼打制）和现烤鱿鱼</p>
+    <a class="nav-a" href="https://uri.amap.com/navigation?to=122.435,29.875,东沙湾&mode=car&callnative=1" target="_blank">📍 导航</a>
+  </div>
+  <div class="spot">
+    <h4><span class="time">傍晚</span>定海古城 <span class="badge b-free">免费</span></h4>
+    <p>1300 年历史海岛古城。中大街历史街区（清代民国建筑）、鸦片战争遗址公园</p>
+    <a class="nav-a" href="https://uri.amap.com/navigation?to=122.110,29.995,定海古城&mode=car&callnative=1" target="_blank">📍 导航</a>
+  </div>
+  <div class="spot">
+    <h4><span class="time">晚餐</span>定海特色小吃 <span class="badge b-food">美食</span></h4>
+    <p>阿三蟹骨酱（蟹脚肉+年糕）、定海小吃街：海蛎子煎、炸鱼饼、海鲜馄饨</p>
+  </div>
+  <div class="spot" style="border-left-color:#facc15">
+    <h4>🏕 Day2 住宿：两个选择</h4>
+    <p><b>方案 A：继续车泊</b> — 定海城区停车场（免费，有公厕/充电桩），特斯拉超充在昌国路，趁晚上充满电<br>
+    <b>方案 B：住一晚民宿</b> — 定海中大街附近民宿 200-400 元/晚，逛完老街直接走回去休息，体验更好。推荐搜"定海古城民宿"</p>
+  </div>
+</div>
+</div>
+
+<div class="day-section d3">
+<div class="day-header" onclick="toggleDay(2)">
+  <div class="day-dot" style="background:#06b6d4"></div>
+  <h2>DAY 3 周日｜天一阁 + 返程</h2>
+  <span class="dist">~280km / 3.5h</span>
+</div>
+<div class="day-body">
+  <div class="spot">
+    <h4><span class="time">上午</span>天一阁 <span class="badge b-pay">¥30</span><span class="badge b-card">文旅卡</span></h4>
+    <p>从朱家尖出发 ~130km/2h。中国最早私家藏书楼，明嘉靖年间建成，近 500 年。江南园林+书卷气。旁边宁波博物馆（免费）是普利兹克奖王澍作品，"瓦墙"震撼</p>
+    <a class="nav-a" href="https://uri.amap.com/navigation?to=121.545,29.872,天一阁&mode=car&callnative=1" target="_blank"> 导航</a>
+  </div>
+  <div class="spot">
+    <h4><span class="time">午餐</span>宁波特色 <span class="badge b-food">美食</span></h4>
+    <p><b>缸鸭狗</b>（天一广场店）：宁波汤圆老字号，猪油芝麻馅必吃<br>
+    <b>南塘老街</b>（1km外）：油赞子、龙凤金团、三北藕丝糖、宁波年糕</p>
+    <a class="nav-a" href="https://uri.amap.com/navigation?to=121.553,29.868,缸鸭狗&mode=car&callnative=1" target="_blank">缸鸭狗</a>
+    <a class="nav-a" href="https://uri.amap.com/navigation?to=121.548,29.862,南塘老街&mode=car&callnative=1" target="_blank">南塘老街</a>
+  </div>
+  <div class="spot">
+    <h4><span class="time">下午</span>返程 ~150km / 2h</h4>
+    <p>走 G92 杭甬高速回家，轻松不赶</p>
+  </div>
+</div>
+</div>
+
+<!-- 预算 -->
+<div class="tips">
+<h3>💰 预算明细（单人估算）</h3>
+<div class="budget-row"><span class="label">🛣 高速过路费（往返）</span><span class="value">~¥250</span></div>
+<div class="budget-row"><span class="label"> 餐饮（3天）</span><span class="value">~¥500</span></div>
+<div class="budget-row" style="padding-left:12px"><span class="label" style="font-size:11px">Day1 沈家门海鲜夜排档</span><span class="value" style="font-size:11px">~¥130</span></div>
+<div class="budget-row" style="padding-left:12px"><span class="label" style="font-size:11px">Day2 午餐+晚餐</span><span class="value" style="font-size:11px">~¥150</span></div>
+<div class="budget-row" style="padding-left:12px"><span class="label" style="font-size:11px">Day3 缸鸭狗+南塘老街</span><span class="value" style="font-size:11px">~¥80</span></div>
+<div class="budget-row" style="padding-left:12px"><span class="label" style="font-size:11px">零食/饮料/水果</span><span class="value" style="font-size:11px">~¥140</span></div>
+<div class="budget-row"><span class="label">⛺ 住宿</span><span class="value free">¥0（车泊）</span></div>
+<div class="budget-row" style="padding-left:12px"><span class="label" style="font-size:11px">可选：Day2 定海民宿</span><span class="value" style="font-size:11px">~¥300</span></div>
+<div class="budget-row"><span class="label">🎫 门票（文旅卡全免）</span><span class="value free">¥0</span></div>
+<div class="budget-row" style="padding-left:12px"><span class="label" style="font-size:11px">南沙 ¥60 + 大青山 ¥60 + 天一阁 ¥30</span><span class="value" style="font-size:11px;color:#64748b;text-decoration:line-through">¥150</span></div>
+<div class="budget-row"><span class="label">⚡ 充电（特斯拉）</span><span class="value">~¥80</span></div>
+<div class="budget-row"><span class="label">🎁 伴手礼/其他</span><span class="value">~¥100</span></div>
+<div style="margin-top:12px;padding-top:10px;border-top:1px solid #334155">
+  <div class="budget-row" style="border:none"><span class="label" style="font-size:14px;color:#f1f5f9;font-weight:600">合计（车泊方案）</span><span class="value" style="font-size:18px;color:#34d399">~¥930</span></div>
+  <div class="budget-row" style="border:none"><span class="label" style="font-size:14px;color:#f1f5f9;font-weight:600">合计（含1晚民宿）</span><span class="value" style="font-size:18px;color:#fb9237">~¥1,230</span></div>
+</div>
+<p class="budget-note">以上为单人估算，两人出行餐饮和住宿可分摊，人均约 ¥700-900。文旅卡如能覆盖门票可省 ¥150。</p>
+</div>
+
+<!-- 门票汇总 -->
+<div class="tips">
+<h3>🎫 门票 & 文旅卡</h3>
+<table>
+<tr><th>景点</th><th>门票</th><th>文旅卡</th></tr>
+<tr><td>朱家尖南沙</td><td>¥60（旺季）</td><td style="color:#34d399">✓ 预计可免</td></tr>
+<tr><td>大青山国家公园</td><td>¥60</td><td style="color:#34d399">✓ 预计可免</td></tr>
+<tr><td>东沙湾</td><td>免费</td><td>—</td></tr>
+<tr><td>定海古城</td><td>免费（街区）</td><td>—</td></tr>
+<tr><td>天一阁</td><td>¥30</td><td style="color:#34d399">✓ 预计可免</td></tr>
+<tr><td>宁波博物馆</td><td>免费</td><td>—</td></tr>
+</table>
+<p style="margin-top:8px">出发前在"浙里办"App 确认当年度景区清单。</p>
+</div>
+
+<div class="tips">
+<h3>⚡ 充电规划</h3>
+<p>Day1 到达后 → 沈家门/定海超充补电<br>
+Day2 晚上 → 定海昌国路特斯拉超充满电<br>
+朱家尖蜈蚣峙码头有国网快充备用<br>
+全程电耗：Day1 ~280km | Day2 ~80km | Day3 ~280km</p>
+</div>
+</div>
+<div id="map"></div>
+</div>
+
+<script>
+const map = L.map('map',{zoomControl:false}).setView([29.85,122.15],10);
+L.control.zoom({position:'topright'}).addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OSM',maxZoom:18}).addTo(map);
+
+const icons = {
+  scenic: (c) => L.divIcon({className:'',html:'<div style="width:20px;height:20px;background:'+c+';border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>',iconSize:[20,20],iconAnchor:[10,10]}),
+  food: L.divIcon({className:'',html:'<div style="width:20px;height:20px;background:#f472b6;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>',iconSize:[20,20],iconAnchor:[10,10]}),
+  camp: L.divIcon({className:'',html:'<div style="width:22px;height:22px;background:#facc15;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>',iconSize:[22,22],iconAnchor:[11,11]}),
+  charge: L.divIcon({className:'',html:'<div style="width:20px;height:20px;background:#22c55e;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>',iconSize:[20,20],iconAnchor:[10,10]}),
+  label: (text,color) => L.divIcon({className:'',html:'<div style="background:'+color+';color:#fff;padding:3px 12px;border-radius:14px;font-size:12px;font-weight:700;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.4);letter-spacing:0.5px">'+text+'</div>',iconSize:[70,24],iconAnchor:[35,30]})
+};
+
+// ===== DAY 1: 宁波方向 → 舟山跨海大桥 → 朱家尖南沙 → 沈家门 =====
+const d1Route = [
+  [29.87, 121.55],  // 宁波天一阁附近（出发方向）
+  [29.88, 121.70],  // 镇海方向
+  [29.92, 121.85],  // 接近跨海大桥
+  [30.02, 122.00],  // 舟山跨海大桥（金塘大桥段）
+  [29.98, 122.12],  // 过桥后进入舟山本岛
+  [29.96, 122.22],  // 沈家门方向
+  [29.92, 122.30],  // 朱家尖大桥
+  [29.845, 122.385],  // 朱家尖南沙
+  [29.955, 122.225],  // 沈家门渔港
+];
+L.polyline(d1Route,{color:'#f97316',weight:4,opacity:0.85,lineCap:'round',lineJoin:'round'}).addTo(map);
+
+const d1Markers = [
+  {lat:29.845,lng:122.385,name:'朱家尖南沙',desc:'十里金沙·日落·车泊露营',icon:icons.scenic('#f97316')},
+  {lat:29.955,lng:122.225,name:'沈家门渔港',desc:'海鲜夜排档：梭子蟹/皮皮虾/望潮',icon:icons.food},
+];
+d1Markers.forEach(p=>L.marker([p.lat,p.lng],{icon:p.icon}).bindPopup('<b>'+p.name+'</b><br><span style="color:#666;font-size:12px">'+p.desc+'</span>').addTo(map));
+L.marker([29.845,122.385],{icon:icons.camp}).bindPopup('<b>Day1 车泊</b><br>南沙停车场').addTo(map);
+L.marker([29.87,122.38],{icon:icons.label('DAY 1','#f97316')}).addTo(map);
+
+// ===== DAY 2: 南沙 → 大青山 → 东沙湾 → 跨海回本岛 → 定海古城 =====
+const d2Route = [
+  [29.845, 122.385], // 南沙出发
+  [29.830, 122.370], // 往南
+  [29.810, 122.350], // 大青山方向
+  [29.805, 122.335], // 大青山
+  [29.820, 122.360], // 返回
+  [29.850, 122.400], // 往东
+  [29.875, 122.435], // 东沙湾
+  [29.890, 122.420], // 返回
+  [29.910, 122.350], // 朱家尖大桥回本岛
+  [29.940, 122.250], // 沈家门方向
+  [29.970, 122.180], // 往西
+  [29.995, 122.110], // 定海古城
+];
+L.polyline(d2Route,{color:'#a78bfa',weight:4,opacity:0.85,lineCap:'round',lineJoin:'round',dashArray:'10 6'}).addTo(map);
+
+const d2Markers = [
+  {lat:29.805,lng:122.335,name:'大青山国家公园',desc:'环岛海岸线·里沙千沙青沙',icon:icons.scenic('#a78bfa')},
+  {lat:29.875,lng:122.435,name:'东沙湾',desc:'冲浪/桨板·舟山鱼丸',icon:icons.scenic('#a78bfa')},
+  {lat:29.995,lng:122.110,name:'定海古城',desc:'1300年古城·中大街·蟹骨酱',icon:icons.scenic('#a78bfa')},
+];
+d2Markers.forEach(p=>L.marker([p.lat,p.lng],{icon:p.icon}).bindPopup('<b>'+p.name+'</b><br><span style="color:#666;font-size:12px">'+p.desc+'</span>').addTo(map));
+L.marker([29.995,122.110],{icon:icons.camp}).bindPopup('<b>Day2 住宿</b><br>定海城区车泊或民宿<br>昌国路特斯拉超充').addTo(map);
+L.marker([29.975,122.130],{icon:icons.charge}).bindPopup('<b>定海特斯拉超充</b><br>昌国路').addTo(map);
+L.marker([29.90,122.22],{icon:icons.label('DAY 2','#a78bfa')}).addTo(map);
+
+// ===== DAY 3: 定海 → 宁波方向 → 天一阁 → 缸鸭狗 → 南塘老街 → 返程 =====
+const d3Route = [
+  [29.995, 122.110], // 定海古城出发
+  [29.970, 122.050], // 往西
+  [29.950, 121.950], // 跨海回宁波方向
+  [29.920, 121.850], // 镇海
+  [29.890, 121.700], // 宁波市区方向
+  [29.872, 121.545], // 天一阁
+  [29.868, 121.553], // 缸鸭狗
+  [29.862, 121.548], // 南塘老街
+  [29.850, 121.500], // 返程方向
+  [29.800, 121.400], // 继续往西
+  [29.600, 121.200], // 绍兴方向
+  [29.400, 120.800], // 接近义乌
+];
+L.polyline(d3Route,{color:'#06b6d4',weight:4,opacity:0.85,lineCap:'round',lineJoin:'round',dashArray:'6 4'}).addTo(map);
+
+const d3Markers = [
+  {lat:29.872,lng:121.545,name:'天一阁',desc:'中国最早私家藏书楼·500年',icon:icons.scenic('#06b6d4')},
+  {lat:29.868,lng:121.553,name:'缸鸭狗',desc:'宁波汤圆老字号·猪油芝麻馅',icon:icons.food},
+  {lat:29.862,lng:121.548,name:'南塘老街',desc:'油赞子/龙凤金团/宁波年糕',icon:icons.food},
+];
+d3Markers.forEach(p=>L.marker([p.lat,p.lng],{icon:p.icon}).bindPopup('<b>'+p.name+'</b><br><span style="color:#666;font-size:12px">'+p.desc+'</span>').addTo(map));
+L.marker([29.88,121.60],{icon:icons.label('DAY 3','#06b6d4')}).addTo(map);
+
+// Fit bounds to show the whole route
+const allPts = [
+  [29.845,122.435],[29.995,122.110],[29.805,122.335],[29.872,121.545]
+];
+map.fitBounds(L.latLngBounds(allPts),{padding:[50,50]});
+
+// Legend
+const legend = L.control({position:'bottomleft'});
+legend.onAdd = function(){
+  const d = L.DomUtil.create('div');
+  d.style.cssText='background:#1e293b;padding:10px 14px;border-radius:10px;font-size:12px;color:#94a3b8;border:1px solid #334155';
+  d.innerHTML='<div style="margin-bottom:4px;color:#f1f5f9;font-weight:600">图例</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#3b82f6;margin-right:4px;vertical-align:middle"></span>景点 <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f472b6;margin:0 4px 0 12px;vertical-align:middle"></span>美食 <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#facc15;margin:0 4px 0 12px;vertical-align:middle"></span>住宿 <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#22c55e;margin:0 4px 0 12px;vertical-align:middle"></span>充电</div><div style="margin-top:6px"><span style="color:#f97316;font-weight:600">━</span> Day1 <span style="color:#a78bfa;font-weight:600;margin-left:8px">┅</span> Day2 <span style="color:#06b6d4;font-weight:600;margin-left:8px"></span> Day3</div>';
+  return d;
+};
+legend.addTo(map);
+
+function toggleDay(idx){
+  const bodies = document.querySelectorAll('.day-body');
+  bodies.forEach((b,i)=>{ b.style.display = i===idx ? 'block' : 'none'; });
+}
+document.querySelectorAll('.day-body').forEach(b=>b.style.display='block');
+</script>
+</body>
+</html>
